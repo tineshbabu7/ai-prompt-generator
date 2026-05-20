@@ -200,16 +200,11 @@ Recommended:
 
 ---
 
-## Screenshots
+![Login Page](assets/screenshots/login.png)
 
-### Login Page
-_Add screenshot here_
+![Prompt Generator](assets/screenshots/prompt.png)
 
-### Prompt Generator
-_Add screenshot here_
-
-### Prompt History
-_Add screenshot here_
+![Prompt History](assets/screenshots/history.png)
 
 ---
 
