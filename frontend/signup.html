@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <title>Sign Up | Promptomania</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="auth-body">
+    <!-- Animated background orbs -->
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+
+    <div style="position:relative;z-index:1;width:100%;max-width:420px;padding:1.2rem">
+        <div class="auth-card">
+            <div class="text-center" style="margin-bottom:1.8rem">
+                <img src="favicon.svg" alt="Promptomania" class="brand-icon mx-auto"
+                    style="height:2.2rem; width:auto; margin-bottom:0.6rem; display:block;">
+                <h4>Create account</h4>
+                <p class="auth-sub">Join Promptomania for free</p>
+            </div>
+            <input type="email" id="email" class="form-control" style="width:100%;margin-bottom:0.75rem"
+                placeholder="Email address" autocomplete="email">
+            <div class="pw-wrap">
+                <input type="password" id="password" class="form-control" placeholder="Password"
+                    autocomplete="new-password">
+                <button type="button" class="pw-eye" onclick="togglePw('password','pwEye1')" id="pwEye1"
+                    title="Show/hide password">
+                    👁️
+                </button>
+            </div>
+            <div class="pw-wrap" style="margin-bottom:1.3rem">
+                <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm password"
+                    autocomplete="new-password">
+                <button type="button" class="pw-eye" onclick="togglePw('confirmPassword','pwEye2')" id="pwEye2"
+                    title="Show/hide password">
+                    👁️
+                </button>
+            </div>
+            <button id="signupBtn" class="btn-primary" style="width:100%;margin-bottom:0.9rem" onclick="signup()">Create
+                Account</button>
+            <p id="error" style="color:#f87171;font-size:0.83rem;text-align:center;min-height:1.1rem"></p>
+            <p id="success" style="color:#4ade80;font-size:0.83rem;text-align:center;min-height:1.1rem"></p>
+            <p class="auth-footer-text" style="text-align:center;font-size:0.83rem;margin-top:0.5rem">
+                Already have an account? <a href="index.html">Sign in</a>
+            </p>
+        </div>
+    </div>
+    <script src="js/signup.js"></script>
+    <script>
+        function togglePw(inputId, btnId) {
+            const input = document.getElementById(inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+            } else {
+                input.type = 'password';
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Dark background fills 100% — no white border -->
+  <rect width="32" height="32" rx="7" fill="#0a0a18"/>
+
+  <!-- Outer glow ring -->
+  <circle cx="16" cy="16" r="13" fill="none" stroke="#4D4DFF" stroke-width="1.2" opacity="0.35"/>
+
+  <!-- Lightning bolt — bold, centered, fills the icon -->
+  <polygon
+    points="19,3 10,17 15.5,17 13,29 22,15 16.5,15"
+    fill="#4D4DFF"/>
+
+  <!-- Bright highlight on bolt tip -->
+  <polygon
+    points="19,3 15.2,11 17.8,11"
+    fill="#8585ff"/>
+</svg>

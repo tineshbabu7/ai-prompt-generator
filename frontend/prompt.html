@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <title>Promptomania — Turn lazy prompts into great ones</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="app-body">
+  <!-- Animated background orbs (these will float above the live coding canvas) -->
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+  <div class="bg-orb bg-orb-3"></div>
+
+  <div class="app-layout" id="appLayout">
+
+    <!-- ── LEFT SIDEBAR ──────────────────────────────────── -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <div class="sidebar-brand">
+          <img src="favicon.svg" alt="Logo" class="brand-emoji" style="height:1.6rem; width:auto;">
+          <div>
+            <div class="brand-name">Promptomania</div>
+            <div class="brand-sub">AI Prompt Generator</div>
+          </div>
+        </div>
+        <button class="new-prompt-btn" onclick="newPrompt()">+ New Prompt</button>
+        <nav class="sidebar-nav">
+          <div class="nav-section-label">📚 Library</div>
+          <div id="libraryList" class="library-list">
+            <p class="library-empty text-muted small">No saved prompts yet.</p>
+          </div>
+
+          <div class="nav-section-label"
+            style="margin-top:1.1rem; display:flex; justify-content:space-between; align-items:center;">
+            🕘 History
+            <button class="history-clear-btn" onclick="clearHistory()" title="Clear all history">Clear All</button>
+          </div>
+          <div id="historyList" class="history-list">
+            <p class="history-empty text-muted small">No history yet.</p>
+          </div>
+        </nav>
+      </div>
+      <div class="sidebar-footer">
+        <button class="btn btn-outline-secondary btn-sm w-100" onclick="logout()">Logout</button>
+      </div>
+    </aside>
+
+    <!-- ── MAIN CONTENT ──────────────────────────────────── -->
+    <main class="main-content">
+
+      <!-- INITIAL INPUT STATE -->
+      <div id="inputState" class="input-state">
+        <h1 class="hero-title">Turn your lazy prompts into great ones</h1>
+        <p class="hero-sub">Idea to prompt in seconds — get much better results from any AI</p>
+
+        <div class="main-input-wrap">
+          <textarea id="inputPrompt" class="main-input" placeholder="I want a prompt that will..." rows="3"></textarea>
+          <button id="generateBtn" class="send-btn" onclick="generatePrompt()">
+            <span id="btnArrow" style="font-size:1.2rem;">→</span>
+            <span id="btnSpinner" class="spinner-border spinner-border-sm d-none" role="status"></span>
+          </button>
+        </div>
+
+        <div class="chips-row">
+          <button class="chip" onclick="fillChip('Research a topic')">🔍 Research a topic</button>
+          <button class="chip" onclick="fillChip('Analyze data and')">📊 Analyze data</button>
+          <button class="chip" onclick="fillChip('Draft a document about')">📄 Draft a document</button>
+          <button class="chip" onclick="fillChip('Brainstorm ideas for')">💡 Brainstorm ideas</button>
+          <button class="chip" onclick="fillChip('Write code for')">💻 Write code</button>
+          <button class="chip" onclick="fillChip('Create an image of')">🎨 Create an image</button>
+        </div>
+      </div>
+
+      <!-- RESULT STATE -->
+      <div id="resultState" class="result-state d-none">
+
+        <!-- Lazy Prompt Card -->
+        <div class="prompt-card">
+          <div class="card-header-row">
+            <span class="section-label">Lazy Prompt</span>
+            <button class="ghost-btn" id="editToggleBtn" onclick="toggleEdit()">✏️ Edit</button>
+          </div>
+          <div id="lazyDisplay" class="lazy-text"></div>
+          <div id="lazyEdit" class="d-none mt-2">
+            <textarea id="editInput" class="form-control mb-2" rows="3"></textarea>
+            <div class="d-flex gap-2">
+              <button class="btn btn-primary btn-sm px-3" onclick="saveEdit()">✨ Regenerate</button>
+              <button class="btn btn-outline-secondary btn-sm" onclick="cancelEdit()">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Great Prompt Card -->
+        <div class="prompt-card mt-3">
+          <div class="card-header-row">
+            <span class="section-label">
+              Great Prompt
+              <span id="promptTypeBadge" class="type-badge ms-2"></span>
+            </span>
+            <div class="d-flex gap-2 align-items-center">
+              <button class="ghost-btn" id="saveLibraryBtn" onclick="saveToLibrary()">💾 Save</button>
+              <button class="ghost-btn" onclick="copyPrompt()">📋 Copy</button>
+            </div>
+          </div>
+          <div id="outputPrompt" class="prompt-output-formatted"></div>
+          <p id="copyMsg" class="text-success small mt-2 d-none">✅ Copied to clipboard!</p>
+          <p id="saveMsg" class="text-success small mt-2 d-none">💾 Saved to library!</p>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- ── RIGHT PANEL ──────────────────────────────────── -->
+    <aside id="rightPanel" class="right-panel d-none">
+      <h3 class="rp-title">Improve your result</h3>
+      <p class="rp-sub">Answer these to get a better prompt</p>
+
+      <!-- Questions List -->
+      <div id="questionsList" class="questions-list mb-3">
+        <!-- JS will populate questions here -->
+      </div>
+
+      <!-- Refine Box -->
+      <div class="refine-box">
+        <div class="refine-header" onclick="toggleRefineBox()" style="cursor:pointer;">
+          <span class="refine-title">Custom Context <span class="new-badge ms-2">Optional</span></span>
+          <button id="refineToggle" class="refine-toggle">▾</button>
+        </div>
+        <div id="refineContent" style="display:none;">
+          <p class="refine-sub mb-2">Want to add something else? Drop it here.</p>
+          <textarea id="refineInput" class="refine-textarea" rows="2"
+            placeholder="e.g. Make it sound more professional..."></textarea>
+        </div>
+      </div>
+
+      <button class="improve-btn w-100 mt-3" onclick="improvePrompt()">
+        <span id="improveBtnText">Improve Prompt</span>
+        <span id="improveSpinner" class="spinner-border spinner-border-sm ms-2 d-none" role="status"></span>
+      </button>
+    </aside>
+
+  </div><!-- end app-layout -->
+
+  <!-- Library View Modal (for viewing a saved prompt) -->
+  <div id="libraryModal" class="library-modal d-none" onclick="closeLibraryModal(event)">
+    <div class="library-modal-inner">
+      <div class="card-header-row mb-3">
+        <span class="section-label">Saved Prompt</span>
+        <button class="ghost-btn" onclick="closeLibraryModal()">✕ Close</button>
+      </div>
+      <p class="text-muted small mb-1"><strong>Your idea:</strong></p>
+      <p id="modalLazy" class="lazy-text mb-3"></p>
+      <p class="text-muted small mb-1"><strong>Enhanced prompt:</strong></p>
+      <div id="modalEnhanced" class="prompt-output-formatted"></div>
+      <button class="ghost-btn mt-3" onclick="copyModalPrompt()">📋 Copy Enhanced Prompt</button>
+    </div>
+  </div>
+
+  <script src="js/live-background.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    const token = localStorage.getItem("token");
+    if (!token) window.location.href = "index.html";
+    function logout() {
+      localStorage.removeItem("token");
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+
+</html>
