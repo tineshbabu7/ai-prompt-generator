@@ -28,7 +28,7 @@ async function signup() {
     btn.textContent = "Creating account...";
 
     try {
-        const response = await fetch("https://ai-prompt-generator.onrender.com/register", {
+        const response = await fetch("https://ai-prompt-generator-8w40.onrender.com/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email: email, password: password })

@@ -15,7 +15,7 @@ async function login() {
   btn.textContent = "Signing in...";
 
   try {
-    const response = await fetch("https://ai-prompt-generator.onrender.com/login", {
+    const response = await fetch("https://ai-prompt-generator-8w40.onrender.com/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username: email, password: password })
