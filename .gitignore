@@ -5,7 +5,7 @@ __pycache__/
 *.pyd
 .Python
 
-# Virtual environment
+# Virtual environments
 venv/
 env/
 .venv/
@@ -20,11 +20,22 @@ env/
 # Logs
 *.log
 
-# IDE
+# IDE settings
 .vscode/
 .idea/
 
-# Distribution
+# Build / distribution
 dist/
 build/
 *.egg-info/
+
+# Node.js
+node_modules/
+
+# Testing / cache
+.pytest_cache/
+.coverage
+
+# OS generated files
+.DS_Store
+Thumbs.db
