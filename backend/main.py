@@ -10,8 +10,6 @@ from auth import verify_password, create_access_token, get_password_hash, verify
 from schemas import LoginRequest, RegisterRequest, PromptRequest, QuestionRequest, SavePromptRequest, PromptResponse, ResetPasswordRequest, PromptHistoryResponse
 from prompt_engine import enhance_prompt, detect_type, generate_questions
 
-GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID", "")
-
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
 app = FastAPI(title="Promptomania API", version="2.0.0")
