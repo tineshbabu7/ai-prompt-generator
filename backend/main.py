@@ -22,7 +22,11 @@ app = FastAPI(title="Promptomania API", version="2.0.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+     allow_origins=[
+        "http://localhost:5500",
+        "http://127.0.0.1:5500",
+        "https://ai-prompt-generator-66twu62lg-tineshbabu7-4659s-projects.vercel.app"
+    ],
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
