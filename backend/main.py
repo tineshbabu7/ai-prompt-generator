@@ -4,10 +4,6 @@ from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 from typing import List
 import os
-
-from google.oauth2 import id_token
-from google.auth.transport import requests as google_requests
-
 from database import get_db
 from models import User, Prompt, PromptHistory
 from auth import verify_password, create_access_token, get_password_hash, verify_token
