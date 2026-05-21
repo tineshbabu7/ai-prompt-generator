@@ -23,7 +23,7 @@ async function resetPassword() {
     btn.textContent = "Resetting...";
 
     try {
-        const res = await fetch("https://ai-prompt-generator-8w40.onrender.com/reset-password", {
+        const res = await fetch("https://ai-prompt-generator-yfi4.onrender.com/reset-password", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, new_password: newPassword })

@@ -1,4 +1,4 @@
-const API = "https://ai-prompt-generator-8w40.onrender.com";
+const API = "https://ai-prompt-generator-yfi4.onrender.com";
 
 //State
 let currentPrompt = "";
