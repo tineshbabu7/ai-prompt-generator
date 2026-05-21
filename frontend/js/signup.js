@@ -33,7 +33,6 @@ async function signup() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email: email, password: password })
         });
-
         const data = await response.json();
 
         if (!response.ok) {
