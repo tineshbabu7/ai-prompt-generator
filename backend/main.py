@@ -9,10 +9,13 @@ from models import User, Prompt, PromptHistory
 from auth import verify_password, create_access_token, get_password_hash, verify_token
 from schemas import LoginRequest, RegisterRequest, PromptRequest, QuestionRequest, SavePromptRequest, PromptResponse, ResetPasswordRequest, PromptHistoryResponse
 from prompt_engine import enhance_prompt, detect_type, generate_questions
+from models import Base
+from database import engine
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
 app = FastAPI(title="Promptomania API", version="2.0.0")
+Base.metadata.create_all(bind=engine)
 
 app.add_middleware(
     CORSMiddleware,
