@@ -4,6 +4,8 @@ from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 from typing import List
 import os
+from google.oauth2 import id_token
+from google.auth.transport import requests as google_requests
 from database import get_db
 from models import User, Prompt, PromptHistory
 from auth import verify_password, create_access_token, get_password_hash, verify_token
@@ -12,6 +14,7 @@ from prompt_engine import enhance_prompt, detect_type, generate_questions
 from models import Base
 from database import engine
 
+GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
 app = FastAPI(title="Promptomania API", version="2.0.0")
